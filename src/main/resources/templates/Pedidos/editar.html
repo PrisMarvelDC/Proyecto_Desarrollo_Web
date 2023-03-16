@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+ <html xmlns:th="http://www.thymeleaf.org">
+     <head th:replace="~{layout/principal :: head}">
+        <title>Distribuidora Noche Buena</title>
+        <meta charset="UTF-8"/>
+    </head>
+     <body>
+      <header th:replace="~{layout/principal :: header}"/>
+    
+           
+             <h2>Datos de los pedidos</h2>
+         <br>
+         <hr>
+         <a th:href="@{/pedidos/listado} ">Regresar</a>
+
+         <form th:action="@{/pedidos/guardar}"
+               method="post"
+               th:object="${pedidos}">
+
+
+             <input type="hidden" 
+                    name="idPedido" 
+                    th:field="*{idPedido}"
+                    size="30" />
+
+             <label>Cliente</label>
+             <input type="text" 
+                    name="cliente" 
+                    value="" 
+                    th:field="*{cliente}"
+                    size="30" />
+             <br>
+             <label>Monto</label>
+             <input type="text" 
+                    name="monto" 
+                    value="" 
+                    th:field="*{monto}"
+                    size="40" />
+             <br>
+             <label>Estado</label>
+             <input type="text" 
+                    name="estado_venta" 
+                    value="" 
+                    th:field="*{estado_venta}"
+                    size="10" />
+             <br>
+             <label>Fecha</label>
+             <input type="text" 
+                    name="fecha" 
+                    value="" 
+                    th:field="*{fecha}"
+                    size="10" />
+             <br>
+             <input type="submit" value="Guardar" />
+
+         </form>
+ <footer th:replace="~{layout/principal :: footer}"/>
+           
+           
+    </body>
+</html>
