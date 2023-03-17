@@ -1,3 +1,4 @@
+/*
 package com.example.demo.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,3 +36,4 @@ public abstract class SecurityConfig implements WebSecurityConfigurer {
         // Here you can configure the authentication manager
     }
 }
+*/

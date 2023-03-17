@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--Avance con la historia de usuario 3 y 5.-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Carrito y seguridad</title>
+        <meta charset="UTF-8"/>
+    </head>
+
+    <body>
+        
+        <header th:replace="~{layout/plantilla :: header}"/>
+        <h2>Listado de carrito y seguridad</h2>        
+        <a th:href="@{/seguridadycarrito/nuevo/}" 
+           class="btn btn-primary">
+           <i class="fas fa-user-plus"></i>>Nuevo dato de seguridad y del carrito</a>
+
+        <div th:if="${servicios != null and !servicios.empty}">
+            <table class="table table-strype">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Software</th>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="seguridadycarrito : ${servicios}">
+                        <td>[[${seguridadycarrito.nombre}]]</td>
+                        <td>[[${seguridadycarrito.apellidos}]]</td>
+                        <td>[[${seguridadycarrito.software}]]</td>
+                        <td>[[${seguridadycarrito.producto}]]</td>
+                        <td>[[${seguridadycarrito.precio}]]<td>
+                        <td><a th:href="@{/seguridadycarrito/eliminar/} + ${seguridadycarrito.id}"
+                               class="btn btn-danger">
+                               <i class="fas fa-trash"></i>Eliminar datos del carrito y seguridad.</a>
+                        
+                        <td><a th:href="@{/seguridadycarrito/modificar/} + ${seguridadycarrito.id}"
+                               class="btn btn-success">
+                               <i class="fas fa-pencil"></i>Modificar datos del carrito y seguridad.</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${servicios == null or servicios.empty}">
+            <h3>No hay datos disponibles, vuelva más tarde</h3>
+        </div>
+         <footer th:replace="~{layout/plantilla :: footer}"/>
+    </body>
+</html>
+
