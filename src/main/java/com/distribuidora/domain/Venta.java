@@ -1,6 +1,7 @@
 
 package com.distribuidora.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,8 @@ public class Venta implements Serializable{
       private static final long serialVersionUID = 1L;
     @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)
+     @Column(name="id_venta")
+
    private Long idVenta;
    private String cliente;
    private String monto;

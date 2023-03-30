@@ -1,3 +1,4 @@
+/*
 package com.distribuidora.controller;
 
 import com.distribuidora.domain.Seguridad;
@@ -47,3 +48,4 @@ public class SeguridadController {
         return "/seguridadycarrito/modifica";
     }
 }
+*/
