@@ -1,6 +1,6 @@
 package com.distribuidora.service.impl;
 
-import com.distribuidora.DAO.SeguridadDAO;
+import com.distribuidora.dao.SeguridadDAO;
 import com.distribuidora.domain.Seguridad;
 import com.distribuidora.service1.SeguridadService;
 import java.util.List;
@@ -20,7 +20,7 @@ public class SeguridadServiceIMP implements SeguridadService{
 
     @Override
     public Seguridad getSeguridad(Seguridad seguridad) {
-        return EDAO.findById(seguridad.getId()).orElse(null);
+        return EDAO.findById(seguridad.getIdSeguridad()).orElse(null);
     }
 
     @Override

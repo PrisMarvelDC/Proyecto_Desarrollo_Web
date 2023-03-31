@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/principal :: head}">
+
+        <title>Distribuidora Noche Buena</title>
+
+        <meta charset="UTF-8"/>
+    </head>
+
+    <body>
+        <header th:replace="~{layout/principal :: header1}"/>
+
+        <section th:replace="~{seguridad/fragmentos :: botonesAgregar}"/>
+
+        <section th:replace="~{seguridad/fragmentos :: agregarSeguridad}"/>
+
+        <section th:replace="~{seguridad/fragmentos :: listadoSeguridades}"/>
+
+
+        <footer th:replace="~{layout/principal :: footer}"/>
+
+
+    </body>
+</html>

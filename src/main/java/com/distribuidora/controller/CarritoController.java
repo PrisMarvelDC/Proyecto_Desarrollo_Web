@@ -2,7 +2,6 @@ package com.distribuidora.controller;
 
 import com.distribuidora.domain.Carrito;
 import com.distribuidora.service1.CarritoService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/seguridadycarrito")
+@RequestMapping("/carrito")
 public class CarritoController {
 
     @Autowired
@@ -19,33 +18,33 @@ public class CarritoController {
 
     @GetMapping("/listado")
     public String Comienzo(Model traslado) {
-        var servicios = carritoService.getCarrito();
-        traslado.addAttribute("servicios", servicios);
-        return "/seguridadycarrito/listado";
+        var carritos = carritoService.getCarrito();
+        traslado.addAttribute("carritos", carritos);
+        return "/carrito/listado";
     }
 
-    @GetMapping("/eliminar/{id}")
+    @GetMapping("/eliminar/{idCarrito}")
     public String eliminarCarrito(Carrito carrito) {
         carritoService.eliminarCarrito(carrito);
-        return "redirect:/seguridadycarrito/listado";
+        return "redirect:/carrito/listado";
     }
 
     @GetMapping("/nuevo/")
     public String nuevoCarrito(Carrito carrito) {
-        return "/seguridadycarrito/modifica";
+        return "/carrito/editar";
     }
 
     @PostMapping("/guardar")
     public String guardarCarrito(Carrito carrito) {
         carritoService.guardarCarrito(carrito);
-        return "redirect:/seguridadycarrito/listado";
+        return "redirect:/carrito/listado";
     }
 
-    @GetMapping("/modificar/{id}")
+    @GetMapping("/editar/{idCarrito}")
     public String modificarCarrito(Carrito carrito, Model traslado) {
         carrito = carritoService.getCarrito(carrito);
         traslado.addAttribute("carrito", carrito);
-        return "/seguridadycarrito/modifica";
+        return "/carrito/editar";
     }
 
 

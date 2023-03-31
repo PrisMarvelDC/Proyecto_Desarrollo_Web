@@ -1,4 +1,4 @@
-package com.distribuidora.DAO;
+package com.distribuidora.dao;
 
 import com.distribuidora.domain.Carrito;
 import org.springframework.data.jpa.repository.JpaRepository;

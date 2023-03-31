@@ -1,6 +1,6 @@
 package com.distribuidora.service.impl;
 
-import com.distribuidora.DAO.CarritoDAO;
+import com.distribuidora.dao.CarritoDAO;
 import com.distribuidora.domain.Carrito;
 import com.distribuidora.service1.CarritoService;
 import java.util.List;
@@ -20,7 +20,7 @@ public class CarritoServiceIMP implements CarritoService{
 
     @Override
     public Carrito getCarrito(Carrito carrito) {
-        return EDAO.findById(carrito.getId()).orElse(null);
+        return EDAO.findById(carrito.getIdCarrito()).orElse(null);
     }
 
     @Override

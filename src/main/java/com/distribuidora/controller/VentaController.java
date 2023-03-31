@@ -1,4 +1,3 @@
-
 package com.distribuidora.controller;
 
 import com.distribuidora.domain.Venta;
@@ -13,37 +12,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/venta")
 public class VentaController {
-     @Autowired
+
+    @Autowired
     private VentaService ventaService;
-    
+
     @GetMapping("/listado")
-    public String inicio(Model model){
-   var ventas=ventaService.getVenta();
-   model.addAttribute("ventas",ventas);
+    public String inicio(Model model) {
+        var ventas = ventaService.getVenta();
+        model.addAttribute("ventas", ventas);
         return "/venta/listado";
-      }
+    }
+
     @GetMapping("/eliminar/{idVenta}")
-    public String eliminaVenta(Venta venta){
+    public String eliminaVenta(Venta venta) {
         ventaService.deleteVenta(venta);
         return "redirect:/venta/listado";
     }
-     @GetMapping("/nuevo")
-    public String nuevoVenta(Venta venta){
-        return"/venta/editar";
+
+    @GetMapping("/nuevo")
+    public String nuevoVenta(Venta venta) {
+        return "/venta/editar";
     }
-     @PostMapping("/guardar")
+
+    @PostMapping("/guardar")
     public String guardarVenta(Venta venta) {
         ventaService.saveVenta(venta);
         return "redirect:/venta/listado";
     }
-     @GetMapping("/editar/{idVenta}")
+
+    @GetMapping("/editar/{idVenta}")
     public String modificaVenta(Venta venta, Model model) {
         venta = ventaService.getVenta(venta);
         model.addAttribute("venta", venta);
         return "/venta/editar";
     }
-    
-    
-    
-    
+
 }
