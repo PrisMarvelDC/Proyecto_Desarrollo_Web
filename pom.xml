@@ -12,7 +12,7 @@
 	<artifactId>Proyecto</artifactId>
 	<version>1</version>
 
-	<name>ProyectoDistribuidora</name>
+	<name>ProyectoDistribuidora1</name>
 	<description>Proyecto del curso web y patrones</description>
 
 	<properties>
@@ -97,7 +97,25 @@
 	  <version>6.0.6</version>
 	  <type>jar</type>
 	 </dependency>
-         
+          <dependency>
+	  <groupId>org.springframework</groupId>
+	  <artifactId>spring-beans</artifactId>
+	  <version>6.0.6</version>
+	  <type>jar</type>
+	 </dependency>
+           <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
 	</dependencies>
 
 	<build>

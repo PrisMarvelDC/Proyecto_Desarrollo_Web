@@ -11,44 +11,74 @@
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
      <body>
+        
+         
+         
          <header th:fragment="header1" class="header1">
                   <nav class="navbar navbar-expand-sm navbar-dark bg-danger p-0 ">
-                    <div class="container">
-                        
-                   <picture >                    
-                     <a th:href="@{/}" class="navbar-brand">[[#{aplicacion.titulo}]]</a>
-                         
-                  <!--       <img src="img/Logo.png" alt="1" width="80" height="50" /></a>
-                 -->    
-                    <figcaption></figcaption>
-                    </picture>
-                     
-                     
-                     
+                   
                      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     
                         <div class="collapse navbar-collapse" id="navbarCollapse">
-                         <ul class="navbar-nav">
+                         
                             
-                              <li class="nav-item px-2">
-                                <a class="nav-menu-link nav-link" th:href="@{/pedido/listado}">[[#{principal.pedidos}]]</a>
+                            
+                            
+                           <ul class="navbar-nav" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_VENDEDOR') or hasRole('ROLE_USER')">
+                           <li class="nav-item px-2">
+                                <a th:href="@{/}" class="navbar-brand"> [[#{aplicacion.titulo}]]</a>
                             </li>
-                            <li class="nav-item px-2">
+                             
                                 <a class="nav-menu-link nav-link" th:href="@{/venta/listado}">[[#{principal.ventas}]]</a>
-                            </li>
+                            
+                               
                               <li class="nav-item px-2">
                                 <a class="nav-menu-link nav-link" th:href="@{/consulta/listado}">[[#{principal.consultas}]]</a>
                             </li>
-                            <li class="nav-item px-2">
-                                <a class="nav-menu-link nav-link" th:href="@{/carrito/listado}">[[#{principal.carrito}]]</a>
-                            </li>
-                            <li class="nav-item px-2">
-                                <a class="nav-menu-link nav-link" th:href="@{/seguridad/listado}">[[#{principal.seguridad}]]</a>
-                            </li>
+                             
                   
                          </ul>
+                            <ul class="navbar-nav" sec:authorize="hasRole('ROLE_USER')">
+                                <li>
+                                 <li class="nav-item px-2" sec:authorize="hasRole('ROLE_USER')">
+                                <a class="nav-menu-link nav-link" th:href="@{/carrito/listado}">[[#{principal.carrito}]]</a>
+                          
+                                </li>
+                                </li>
+                            </ul>
+                            
+                            
+                                <ul class="navbar-nav" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_VENDEDOR')">
+                           
+                                 <li class="nav-item px-2">
+                                <a class="nav-menu-link nav-link" th:href="@{/pedido/listado}">[[#{principal.pedidos}]]</a>
+                            </li>
+                            <li class="nav-item px-2">
+                            <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')or hasRole('ROLE_VENDEDOR')">
+                                <a class="nav-menu-link nav-link" th:href="@{/seguridad/listado}">[[#{principal.seguridad}]]</a>
+                            </li>
+                               
+                                
+                            </ul>
+                            
+                            
+                             <ul class="navbar-nav" sec:authorize="!isAuthenticated()">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/login}"><i class="fas fa-sign-in-alt"></i></a>
+                            </li>                            
+                        </ul>
+                        <ul class="navbar-nav" sec:authorize="isAuthenticated()">
+                            <li class="nav-item text-white my-auto"> 
+                                <i class="fas fa-user"></i> <span sec:authentication="name">Bob</span>
+                            </li>
+                            <li class="nav-item my-auto">
+                                <form method="post" th:action="@{/logout}">
+                                    <button class="btn btn-dark"><i class="fas fa-sign-out-alt"></i></button>
+                                </form>
+                            </li>                            
+                        </ul>
                      </div>
                  
                  </div>
@@ -59,13 +89,13 @@
          <header>
                  <div >
          <section  text-align: center> 
-                 
+              <!--    
                  <picture >                    
-                    <img src="img/principal.png" alt="" width="1100" height="700" />
-                     
+                   <img src="img/principal.png" alt="" width="1100" height="700" 
+                    <img src="../../static/img/principal.png"  alt="" width="1100" height="700" />
                     <figcaption></figcaption>
                 </picture>
-                 
+                 />-->
              </section>
              </div>
              
