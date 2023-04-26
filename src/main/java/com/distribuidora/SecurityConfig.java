@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 
 
@@ -26,11 +27,13 @@ public class SecurityConfig {
     public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception {
         build.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
+   
   
       @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
         http
+                
                 .authorizeHttpRequests((requests) -> requests
                 .requestMatchers(
                         "/",
@@ -38,8 +41,11 @@ public class SecurityConfig {
                         "/errores/**",
                         "/pedido/listado",
                         "/consulta/listado",
-                        
+                        "/evento/listado",
+                        "../../static/img/Evento1.png",
                         "/webjars/**").permitAll()
+                        
+                       
                 .requestMatchers(
                         "/seguridad/listado",
                         "/seguridad/nuevo",
@@ -47,8 +53,11 @@ public class SecurityConfig {
                         "/seguridad/editar/**",
                         "/seguridad/eliminar/**"
                         )
+                
                 .hasRole("ADMIN" )
                 
+                        
+         
                         
                 .requestMatchers(
                         "/carrito/nuevo",
@@ -61,6 +70,8 @@ public class SecurityConfig {
                         "/venta/nuevo",
                         "/venta/guardar",
                         "/venta/editar/**",
+                       "/evento/listado",
+
                         "/venta/eliminar/**")
                 .hasRole("USER")   
                      
@@ -71,6 +82,8 @@ public class SecurityConfig {
                         "/pedido/editar/**",
                         "/pedido/eliminar/**",
                         "/venta/nuevo",
+                         "/evento/listado",
+
                         "/venta/guardar",
                         "/venta/editar/**",
                         "/venta/eliminar/**")
@@ -80,9 +93,22 @@ public class SecurityConfig {
                 .requestMatchers(
                         "/carrito/listado",
                         "/pedido/listado",
-                        "/venta/listado")
-                .hasAnyRole("ADMIN", "VENDEDOR", "USER")
+                        "/venta/listado",
+                        "/evento/listado"
                 )
+                .hasAnyRole("ADMIN", "VENDEDOR", "USER")
+               .requestMatchers(
+                       "/css/**", 
+                       "/js/**", 
+                       "../../static/img/Evento1.png",
+                       "/img/**" 
+                ).permitAll()
+                
+                
+                )
+                
+                
+                
                 .formLogin((form) -> form
                 .loginPage("/login")
                 .permitAll())
@@ -90,5 +116,7 @@ public class SecurityConfig {
                 .exceptionHandling().accessDeniedPage("/errores/403");
         return http.build();
     }
+   
+
     
     }

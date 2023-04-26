@@ -10,11 +10,15 @@
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
+    
+    
      <body>
         
          
          
          <header th:fragment="header1" class="header1">
+             
+             
                   <nav class="navbar navbar-expand-sm navbar-dark bg-danger p-0 ">
                    
                      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -27,18 +31,26 @@
                             
                             
                            <ul class="navbar-nav" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_VENDEDOR') or hasRole('ROLE_USER')">
-                           <li class="nav-item px-2">
-                                <a th:href="@{/}" class="navbar-brand"> [[#{aplicacion.titulo}]]</a>
+                           
+                               <li class="nav-item px-2">
+                                <a th:href="@{/}" class="navbar-brand"> <img src="/img/Logo.png" alt="" widht="20" height="35"/></a>
                             </li>
-                             
+                               
+                              
+                                <li class="nav-item px-2">
+                                <a class="nav-menu-link nav-link" th:href="@{evento/listado}">[[#{principal.eventos}]]</a>
+                            
+                                </li>
+                               
+                               <li>
                                 <a class="nav-menu-link nav-link" th:href="@{/venta/listado}">[[#{principal.ventas}]]</a>
                             
-                               
+                               </li>
                               <li class="nav-item px-2">
                                 <a class="nav-menu-link nav-link" th:href="@{/consulta/listado}">[[#{principal.consultas}]]</a>
                             </li>
-                             
-                  
+                               
+                            
                          </ul>
                             <ul class="navbar-nav" sec:authorize="hasRole('ROLE_USER')">
                                 <li>
@@ -83,23 +95,22 @@
                  
                  </div>
              </nav>
+                     
              
          </header >
-         
-         <header>
-                 <div >
+         <header  th:fragment="header4" class="header4">
+         <section>
+          
+         <div >
          <section  text-align: center> 
-              <!--    
-                 <picture >                    
-                   <img src="img/principal.png" alt="" width="1100" height="700" 
-                    <img src="../../static/img/principal.png"  alt="" width="1100" height="700" />
-                    <figcaption></figcaption>
-                </picture>
-                 />-->
+          
+             <img src="/img/principal.png" alt="" widht="1500" height="510"/>
              </section>
              </div>
-             
-         </header>
+        
+         </section>
+          </header >
+         
          
          
 
