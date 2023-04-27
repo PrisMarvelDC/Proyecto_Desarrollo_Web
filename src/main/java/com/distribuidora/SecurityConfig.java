@@ -43,6 +43,7 @@ public class SecurityConfig {
                         "/consulta/listado",
                         "/evento/listado",
                         "/oferta/listado",
+                        "/catalogo/listado",
                         "/sobrenosotros/listado",
                         "../../static/img/Evento1.png",
                         "/webjars/**").permitAll()
@@ -53,7 +54,12 @@ public class SecurityConfig {
                         "/seguridad/nuevo",
                         "/seguridad/guardar",
                         "/seguridad/editar/**",
-                        "/seguridad/eliminar/**"
+                        "/seguridad/eliminar/**",
+                        "/catalogo/nuevo",
+                         "/catalogo/listado",
+                        "/catalogo/guardar",
+                        "/catalogo/editar/**",
+                        "/catalogo/eliminar/**"
                         )
                 
                 .hasRole("ADMIN" )
@@ -88,7 +94,15 @@ public class SecurityConfig {
 
                         "/venta/guardar",
                         "/venta/editar/**",
-                        "/venta/eliminar/**")
+                        "/venta/eliminar/**",
+                        "/catalogo/nuevo",
+                         "/catalogo/listado",
+                        "/catalogo/guardar",
+                        "/catalogo/editar/**",
+                        "/catalogo/eliminar/**"
+                 
+                 
+                 )
                 .hasAnyRole("ADMIN", "VENDEDOR")
                        
                         

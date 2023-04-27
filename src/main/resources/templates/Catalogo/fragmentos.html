@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+ <html xmlns:th="http://www.thymeleaf.org">
+     <head th:replace="~{layout/principal :: head}">
+        <title>Distribuidora Noche Buena</title>
+        <meta charset="UTF-8"/>
+        
+    </head>
+     <body>
+     <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container" sec:authorize="hasRole('USER')">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarCatalogo">
+                            
+                            
+                             
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+  <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+</svg>
+                    
+                    [[#{catalogo.agregar}]]
+                          
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2 Fragmento para agregar catalogo, es la ventana modal -->
+        <section th:fragment="agregarCatalogo">
+            <div id="agregarCatalogo" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                
+                
+                
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">[[#{catalogo.agregar}]]</h5>
+                            <button type="button" 
+                                    class="btn-close" 
+                                    data-bs-dismiss="modal" 
+                                    aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/catalogo/guardar}" th:object="${catalogo}"
+                              method="POST" class="was-validated">
+                            <div class="modal-body">
+                               
+                                <div class="mb-3">
+                                    <label for="Articulo">Agregar consulta</label>
+                                    <input type="text" class="form-control" name="Articulo" required="true">
+                                </div>
+                                
+                                
+                                
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">[[#{accion.guardar}]]</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section> 
+
+        <!-- 3 Sección principal para mostrar la informacion de la entidad catalogo -->
+        <section th:fragment="listadoCatalogo" id="catalogo">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{catalogo.listado}]]</h4></div>
+                            <div th:if="${catalogos !=null and !catalogos.empty}">
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-dark">
+                                        <tr><th>#</th>
+                                            <td>[[#{catalogo.Articulo}]]</td>
+                                          
+                                           <th></th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="catalogo, contador : ${catalogos}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${catalogo.Articulo}]]</td>
+                                      
+                                           
+                                           <td> <a th:href="@{/catalogo/eliminar/} + ${catalogo.idCatalogo}"
+                                                   class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> Eliminar</a>
+                                                     <a th:href="@{/catalogo/editar/} + ${catalogo.idCatalogo}"
+                                                    class="btn btn-success">
+                                                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                             <div class="text-center p-2" th:if="${catalogos ==null or catalogos.empty}">
+                                <span>No hay catalogos realizados recientemente</span>
+                               
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </section>
+
+        <!-- 4 Fragmento que se utiliza en la página editar.html -->
+        <section th:fragment="editarCatalogo">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form method="POST"
+                          th:action="@{/catalogo/guardar}" th:object="${catalogo}"
+                          class="was-validated">
+                        <input type="hidden" name="idCatalogo" th:field="*{idCatalogo}"/>
+                        
+                        <section th:replace="~{catalogo/fragmentos :: botonesEditar}"/>
+                        <div id=details>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-header bg-info">
+                                                <h4>Actualizar Catalogos</h4>
+                                            </div>
+                                            <div class="card-body">
+                                               
+                                              
+                                                <div class="mb-3">
+                                                    <label for="Articulo">[[#{catalogo.Articulo}]]</label>
+                                                    <input type="text"
+                                                       class="form-control" 
+                                                        name="Articulo" 
+                                                        th:field="*{Articulo}"
+                                                        required="true"
+                                                        />
+                                                       
+                                                </div>
+                                             
+                                              
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5 Fragmento que se utiliza en el fragmento anterior -->
+        <section th:fragment="botonesEditar">
+            <div class="container py-4 mb-4 bg-light">
+                <div class="row">
+                    <div class="col-md-4 d-grid">
+                        <a th:href="@{/catalogo/listado}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">                                
+                        <a th:href="@{/catalogo/eliminar/}+${catalogo.idCatalogo}"
+                           class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check"></i>Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+        
+        
+          
+        </section>
+         
+         
+    </body>
+</html>
