@@ -43,6 +43,7 @@ public class SecurityConfig {
                         "/consulta/listado",
                         "/evento/listado",
                         "/oferta/listado",
+                        "/sobrenosotros/listado",
                         "../../static/img/Evento1.png",
                         "/webjars/**").permitAll()
                         
